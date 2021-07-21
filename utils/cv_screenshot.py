@@ -2,7 +2,7 @@
 # python take_screenshot.py
 
 import numpy as np
-import pyautogui  # 进行屏幕截图
+import pyautogui  # 用于截图
 import imutils
 import cv2
 
@@ -18,16 +18,20 @@ reader = easyocr.Reader(['en'])
 
 
 def capture_screen():
+    # 数字键1 & 数字键2
     key_one = win32api.GetKeyState(0x31)
     key_two = win32api.GetKeyState(0x32)
 
     if(key_one < 0 or key_two < 0):
         image = pyautogui.screenshot()
         image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
-        cv2.imwrite("in_memory_to_disk.png", image)
 
-        # 屏幕截图并直接保存到磁盘
-        pyautogui.screenshot("straight_to_disk.png")
+        #
+        cv2.imwrite("temp/in_memory_to_disk.png", image)
+
+        # TODO: 未必需要用这个
+        # # 屏幕截图并直接保存到磁盘
+        # pyautogui.screenshot("temp/straight_to_disk.png")
 
         # 加载屏幕截图
         image = cv2.imread("straight_to_disk.png")
@@ -35,17 +39,18 @@ def capture_screen():
         print("height,width,dimensions")
         print(sp)
 
+        # 全屏的大小
         full_height = sp[0]
         full_width = sp[1]
 
-        hs = full_height - 85
-        he = full_height - 50
+        y_start = full_height - 85
+        y_end = full_height - 50
 
-        ws = full_width - 200
-        we = full_width - 50
+        x_start = full_width - 200
+        y_end = full_width - 50
 
-        cropped = image[hs:he,
-                        ws:we]  # 裁剪坐标为[y0:y1, x0:x1]
+        cropped = image[y_start:y_end,
+                        x_start:y_end]  # 裁剪坐标为[y0:y1, x0:x1]
 
         cv2.imwrite("cropped.png", cropped)
 
@@ -65,5 +70,9 @@ def capture_screen():
         cv2.waitKey(0)
 
 
-while True:
-    capture_screen()
+def main():
+    while True:
+        capture_screen()
+
+
+if __name__ == '__main__':
