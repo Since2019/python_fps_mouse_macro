@@ -93,19 +93,19 @@ class RecoilController:
         if ctrl < 0:
             if up < 0:
                 print('up')
-                print(up)
                 self.offset_val += CONST_DELTA_VAL
+                print(f"suppression Pixel Per Loop{self.offset_val}")
 
             elif down < 0:
                 print('down')
-                print(down)
                 # 判断Limit
                 if(self.offset_val > CONST_DELTA_VAL):
                     self.offset_val -= CONST_DELTA_VAL
+                    print(f"suppression Pixel Per Loop{self.offset_val}")
+
             elif key_c < 0:
                 _exit(SIGINT)
 
-            print(f"suppression Pixel Per Second{self.offset_val}")
             time.sleep(0.06)
 
     def change_compensation(self, x, y, dx, dy):
