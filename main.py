@@ -46,12 +46,13 @@ class RecoilController:
 
     def _load_weapon_config(self, weapon_config):
         __debug__ and print("loading weapon config")
+        __debug__ and print(f"weapon_config:\n{weapon_config}")
         try:
             tmp_offset_horizontal = self.offset_horizontal
             tmp_offset_vertical = self.offset_vertical
             # 装载参数
-            self.offset_horizontal = int(weapon_config['offset_horizontal'])
-            self.offset_vertical = int(weapon_config['offset_vertical'])
+            self.offset_horizontal = int(weapon_config['horizontal'])
+            self.offset_vertical = int(weapon_config['vertical'])
         except:
             self.offset_horizontal = tmp_offset_horizontal
             self.offset_vertical = tmp_offset_vertical

@@ -99,7 +99,7 @@ class WeaponSwitchHandler:
         try:
             # Open the JSON file for reading
             # TODO 目录不存在 files/
-            jsonFile = open(f"{game}_weapon_config", "r")
+            jsonFile = open(f"{game}_weapon_config.json", "r")
             weapon_json = json.load(jsonFile)  # Read the JSON into the buffer
             jsonFile.close()  # Close the JSON file
 
@@ -114,7 +114,7 @@ class WeaponSwitchHandler:
                 print("cannot find such a weapon")
 
         except:
-            jsonFile = open(f"{game}_weapon_config", "w+")
+            jsonFile = open(f"{game}_weapon_config.json", "w+")
             print("Failed to open the file so I created a new one.")
 
     def _capture_screen(self):
@@ -153,14 +153,14 @@ class WeaponSwitchHandler:
             full_height = sp[0]
             full_width = sp[1]
 
-            y_start = full_height - 95
+            y_start = full_height - 85
             y_end = full_height - 50
 
-            x_start = full_width - 210
-            y_end = full_width - 50
+            x_start = full_width - 230
+            x_end = full_width - 50
 
             cropped = image[y_start:y_end,
-                            x_start:y_end]  # Cropping Area: [y_start:y_end, x_start:y_end]
+                            x_start:x_end]  # Cropping Area: [y_start:y_end, x_start:y_end]
 
             cv2.imwrite("cropped.png", cropped)
 
